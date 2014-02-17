@@ -1,3 +1,9 @@
+vokativ
+=======
+
+#### Oslovte své uživatele správně!
+
+
 Instalace
 =========
 
@@ -20,17 +26,19 @@ u'adriano'
 u'fialová'
 ```
 
-Funkce *vokativ()* bere jako první argument vlastní jméno v 1. pádu jednotného čísla a vráti ho vyskloňované v 5. pádu.
-Návratová hodnota funkce je vždy typu *unicode* a je zapsaná malými písmeni.
+Funkce *vokativ()* bere jako první argument vlastní jméno v 1. pádu jednotného čísla a vrátí ho vyskloňované v 5. pádu.
+Návratová hodnota funkce je vždy řetězec s malými písmeny typu *unicode*.
 Upozorňujeme, že funkce nemusí správně fungovat pro cizí jména.
 
-Další argumenty jsou:
+### Další argumenty jsou:
 
-#### woman (výchozí hodnota False)
+#### woman 
+*(výchozí hodnota False)*
 
 Použijte True, pokud si přejete skloňovat ženská jména.
 
-#### last_name (výchozí hodnota False)
+#### last_name
+*(výchozí hodnota False)*
 
 Použijte True, pokud si přejete skloňovať příjmení. Pro ženská jména se pak
 skloňování chová malinko jinak (viz níže).
@@ -39,10 +47,9 @@ skloňování chová malinko jinak (viz níže).
 Algoritmus skloňování
 =====================
 
-Mužská jména
-------------
+### Mužská jména
 
-Skloňování mužských jmen je založeno na koncovkách jména. V souboru [vokativ/man_siffixes](https://github.com/Mimino666/vokativ/blob/master/vokativ/man_suffixes)
+Skloňování mužských jmen je založeno na koncovkách slov. V souboru [vokativ/man_suffixes](https://github.com/Mimino666/vokativ/blob/master/vokativ/man_suffixes)
 je seznam pravidel, podle kterých se skloňuje. Například pravidlo: ```tr tře``` znamená, že pokud
 zadané jméno končí na písmena "tr", tak je nahradíme písmeny "tře". Podle tohoto pravidla se
 skloňuje například:
@@ -51,31 +58,30 @@ skloňuje například:
     Silvestr  =>  Silvestře
 ```
 
-Pravidlá zkoušime v pořadí od nejdelších po nejkratší. Tedy pravidlo ```gintr gintre``` má přednost před ```tr tře```.
-Pokud žádné pravidlo není možné aplikovat, tak prostě k zadanému jménu připojíme "e". Například:
+Pravidla zkoušíme v pořadí od nejdelších po nejkratší. Proto má pravidlo ```gintr gintre``` přednost před pravidlem ```tr tře```.
+Pokud žádné pravidlo není možné aplikovat, k zadanému jménu připojíme "e". Například:
 ```
     Helmut    =>  Helmute
 ```
 
 
-Ženská jména
-------------
+### Ženská jména
 
 Pro ženská jména je situace velmi jednoduchá. Pokud se jedná o křestní jméno,
-tak skloňujeme jen jména končící na "a".
-Například skloňujeme:
+skloňujeme jen jména končící na "a".
+Například:
 ```
     Jana      =>  Jano
     Tereza    =>  Terezo
 ```
-Ale už ne:
+ale už ne:
 ```
     Dagmar    =>  Dagmar
     Marie     =>  Marie
 ```
 
 
-V případě příjmení nedochází ke skloňování nikdy. Tedy:
+V případě příjmení nedochází ke skloňování nikdy:
 ```
     Nováková  =>  Nováková
     Ivanova   =>  Ivanova
