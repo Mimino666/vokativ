@@ -59,7 +59,7 @@ class Vokativ(object):
 
     def _find_correct_suffix(self, suffixes, name):
         # it is important(!) to try suffixes from longest to shortest
-        for suffix_length in xrange(len(name), 0, -1):
+        for suffix_length in six.moves.xrange(len(name), 0, -1):
             suffix = name[-suffix_length:]
             if suffix in suffixes:
                 return name[:-suffix_length] + suffixes[suffix]
