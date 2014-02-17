@@ -4,8 +4,6 @@ except ImportError:
     from distutils.core import setup
 
 
-version = __import__('vokativ').__version__
-
 with open('README.md') as f:
     readme = f.read()
 with open('LICENSE') as f:
@@ -14,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
     name='vokativ',
-    version=version,
+    version='1.0.4',
     description='Declension of Czech names into vocative case.',
     long_description=readme,
     author='Michal Mimino Danilak',
