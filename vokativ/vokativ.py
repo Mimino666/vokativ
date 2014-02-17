@@ -2,14 +2,12 @@ import os
 import six
 
 
-SUFFIXES_DIRNAME = os.path.join(os.path.dirname(__file__), 'suffixes')
+SUFFIXES_DIRNAME = os.path.dirname(__file__)
 
 
 class Vokativ(object):
     def __init__(self, suffixes_dirname=SUFFIXES_DIRNAME):
-        self.suffixes_dirname = suffixes_dirname
-        self._man_first_name_suffixes = None
-        self._man_last_name_suffixes = None
+        self._man_suffixes = self._init_suffixes(os.path.join(suffixes_dirname, 'man_suffixes'))
 
     def vokativ(self, name, woman=False, last_name=False):
         if not isinstance(name, six.string_types):
@@ -38,16 +36,10 @@ class Vokativ(object):
         return name
 
     def _vokativ_man_first_name(self, name):
-        if self._man_first_name_suffixes is None:
-            filename = os.path.join(self.suffixes_dirname, 'man_first_name')
-            self._man_first_name_suffixes = self._init_suffixes(filename)
-        return self._find_correct_suffix(self._man_first_name_suffixes, name) or (name + 'e')
+        return self._find_correct_suffix(self._man_suffixes, name) or (name + 'e')
 
     def _vokativ_man_last_name(self, name):
-        if self._man_last_name_suffixes is None:
-            filename = os.path.join(self.suffixes_dirname, 'man_last_name')
-            self._man_last_name_suffixes = self._init_suffixes(filename)
-        return self._find_correct_suffix(self._man_last_name_suffixes, name) or (name + 'e')
+        return self._find_correct_suffix(self._man_suffixes, name) or (name + 'e')
 
     def _init_suffixes(self, filename):
         suffixes = {}

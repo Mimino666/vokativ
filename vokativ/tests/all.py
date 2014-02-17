@@ -20,8 +20,8 @@ class VokativTest(unittest.TestCase):
         self.assertEqual(vokativ('Tom'), 'tome')
         self.assertEqual(vokativ('TOM'), 'tome')
         self.assertEqual(vokativ('ToM'), 'tome')
-        self.assertIsInstance(vokativ('Tom'), six.text_type)
-        self.assertIsInstance(vokativ(u'Tom'), six.text_type)
+        self.assertTrue(isinstance(vokativ('Tom'), six.text_type))
+        self.assertTrue(isinstance(vokativ(u'Tom'), six.text_type))
 
     def test_man_first_name(self):
         for name, vok in self._get_tests('man_first_name_tests'):

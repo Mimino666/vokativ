@@ -2,4 +2,4 @@ include README.md
 include LICENSE
 include MANIFEST.in
 include requirements.txt
-recursive-include vokativ/suffixes *
+include vokativ/man_suffixes
