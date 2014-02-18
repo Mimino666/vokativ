@@ -1,13 +1,14 @@
-import os
+from os import path
 import six
+from six.moves import cPickle as pickle
 
 
-SUFFIXES_DIRNAME = os.path.dirname(__file__)
+DATA_DIRNAME = path.join(path.dirname(__file__), 'data')
 
 
 class Vokativ(object):
-    def __init__(self, suffixes_dirname=SUFFIXES_DIRNAME):
-        self._man_suffixes = self._init_suffixes(os.path.join(suffixes_dirname, 'man_suffixes'))
+    def __init__(self, data_dirname=DATA_DIRNAME):
+        self.data_dirname = data_dirname
 
     def vokativ(self, name, woman=False, last_name=False):
         if not isinstance(name, six.string_types):
@@ -36,25 +37,29 @@ class Vokativ(object):
         return name
 
     def _vokativ_man_first_name(self, name):
-        return self._find_correct_suffix(self._man_suffixes, name) or (name + 'e')
+        return self._find_correct_suffix(name, self.man_suffixes)
 
     def _vokativ_man_last_name(self, name):
-        return self._find_correct_suffix(self._man_suffixes, name) or (name + 'e')
+        return self._find_correct_suffix(name, self.man_suffixes)
 
     def _init_suffixes(self, filename):
-        suffixes = {}
         with open(filename, 'rb') as f:
-            for line in f:
-                tokens = line.decode('utf-8').split()
-                suffixes[tokens[0]] = tokens[1]
-        return suffixes
+            return pickle.load(f)
 
-    def _find_correct_suffix(self, suffixes, name):
+    def _find_correct_suffix(self, name, suffixes):
         # it is important(!) to try suffixes from longest to shortest
         for suffix_length in six.moves.xrange(len(name), 0, -1):
             suffix = name[-suffix_length:]
             if suffix in suffixes:
                 return name[:-suffix_length] + suffixes[suffix]
+        return name + suffixes.get('', '')
+
+    _man_suffixes = None
+    @property
+    def man_suffixes(self):
+        if self._man_suffixes is None:
+            self._man_suffixes = self._init_suffixes(path.join(self.data_dirname, 'man_suffixes'))
+        return self._man_suffixes
 
 
 VOKATIV = Vokativ()
