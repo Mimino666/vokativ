@@ -12,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
     name='vokativ',
-    version='1.0.4',
+    version='1.1.0',
     description='Declension of Czech names into vocative case.',
     long_description=readme,
     author='Michal Mimino Danilak',
