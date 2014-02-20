@@ -16,73 +16,73 @@ Použití
 
 ```
 >>> from vokativ import vokativ
->>> vokativ('Michal')
-u'michale'
 >>> vokativ('Petr')
 u'petře'
->>> vokativ('Adriana', woman=True)
+>>> vokativ(u'Novák')
+u'nováku'
+>>> vokativ('Adriana')
 u'adriano'
->>> vokativ(u'Fialová', woman=True, last_name=True)
+>>> vokativ(u'Fialová')
 u'fialová'
 ```
 
-Funkce *vokativ()* bere jako první argument vlastní jméno v 1. pádu jednotného čísla a vrátí ho vyskloňované v 5. pádu.
+Funkce **vokativ()** bere jako první argument vlastní jméno v 1. pádu jednotného čísla a vrátí ho vyskloňované v 5. pádu.
 Návratová hodnota funkce je vždy řetězec s malými písmeny typu *unicode*.
-Upozorňujeme, že funkce nemusí správně fungovat pro cizí jména.
+Upozorňujeme, že funkce nemusí fungovat správně pro jména cizího původu.
 
-### Další argumenty jsou:
+### Další volitelné argumenty jsou:
 
-#### woman 
-*(výchozí hodnota False)*
+#### woman
 
-Použijte True, pokud si přejete skloňovat ženská jména.
+Použijte *True*, pokud si přejete zadané jméno skloňovat jako ženské.
+
+Použijte *False*, pokud si přejete zadané jméno skloňovat jako mužské.
+
+Ve výchozím případě je pohlaví detekováno automaticky.
+
+```
+>>> vokativ('Michel')  # automaticky skloňuje jako mužské jméno
+u'micheli'
+>>> vokativ('Michel', woman=False)
+u'micheli'
+>>> vokativ('Michel', woman=True)
+u'michel'
+```
 
 #### last_name
-*(výchozí hodnota False)*
 
-Použijte True, pokud si přejete skloňovať příjmení. Pro ženská jména se pak
-skloňování chová malinko jinak (viz níže).
+Použijte *True*, pokud si přejete zadané jméno skloňovat jako příjmení.
 
+Použijte *False*, pokus si přejete zadané jméno skloňovat jako křestní jméno.
 
-Algoritmus skloňování
-=====================
+Ve výchozím případě je typ jména detekován automaticky.
 
-### Mužská jména
+Hodnota tohoto parametru ovlivňuje pouze skloňování ženských jmen.
 
-Skloňování mužských jmen je založeno na koncovkách slov. V souboru [vokativ/man_suffixes](https://github.com/Mimino666/vokativ/blob/master/vokativ/man_suffixes)
-je seznam pravidel, podle kterých se skloňuje. Například pravidlo: ```tr tře``` znamená, že pokud
-zadané jméno končí na písmena "tr", tak je nahradíme písmeny "tře". Podle tohoto pravidla se
-skloňuje například:
 ```
-    Petr      =>  Petře
-    Silvestr  =>  Silvestře
+>>> vokativ('Ivanova')  # automaticky skloňuje jako příjmení
+u'ivanova'
+>>> vokativ('Ivanova', last_name=True)
+u'ivanova'
+>>> vokativ('Ivanova', last_name=False)
+u'ivanovo'
 ```
 
-Pravidla zkoušíme v pořadí od nejdelších po nejkratší. Proto má pravidlo ```gintr gintre``` přednost před pravidlem ```tr tře```.
-Pokud žádné pravidlo není možné aplikovat, k zadanému jménu připojíme "e". Například:
-```
-    Helmut    =>  Helmute
-```
+Automatická detekce pohlaví
+===========================
 
+Knihovna **vokativ** poskytuje taky jednoduchou funkci na detekci pohlaví podle křestního jména či příjmení.
+Pro četnosti jmen v ČR podle [statistického úřadu](http://www.mvcr.cz/clanek/cetnost-jmen-a-prijmeni-722752.aspx)
+funkce funguje správně v 99.7% případů.
 
-### Ženská jména
-
-Pro ženská jména je situace velmi jednoduchá. Pokud se jedná o křestní jméno,
-skloňujeme jen jména končící na "a".
-Například:
 ```
-    Jana      =>  Jano
-    Tereza    =>  Terezo
-```
-ale už ne:
-```
-    Dagmar    =>  Dagmar
-    Marie     =>  Marie
-```
-
-
-V případě příjmení nedochází ke skloňování nikdy:
-```
-    Nováková  =>  Nováková
-    Ivanova   =>  Ivanova
+>>> from vokativ import sex
+>>> sex('Michal')
+'m'
+>>> sex('Novák')
+'m'
+>>> sex('Tereza')
+'w'
+>>> sex(u'Nováková')
+'w'
 ```
