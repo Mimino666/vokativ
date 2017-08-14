@@ -58,7 +58,7 @@ class VokativTest(unittest.TestCase):
     def test_corner_cases(self):
         self.assertRaises(TypeError, vokativ, None)
         self.assertRaises(TypeError, vokativ, 10)
-        self.assertEqual(vokativ(''), 'e')
+        self.assertEqual(vokativ(''), '')
 
 
 if __name__ == '__main__':

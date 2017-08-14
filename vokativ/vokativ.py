@@ -13,6 +13,8 @@ class Vokativ(object):
     def vokativ(self, name, woman=None, last_name=None):
         if not isinstance(name, six.string_types):
             raise TypeError('str or unicode type expected. %s received, instead.' % type(name))
+        if name == '':
+            return ''
         name = six.text_type(name).lower()
         if woman is None:
             woman = self.sex(name) == 'w'

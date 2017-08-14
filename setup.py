@@ -3,6 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
+import vokativ
 
 with open('README.md') as f:
     readme = f.read()
@@ -12,7 +13,7 @@ with open('LICENSE') as f:
 
 setup(
     name='vokativ',
-    version='1.1.0',
+    version=vokativ.__version__,
     description='Declension of Czech names into vocative case.',
     long_description=readme,
     author='Michal Mimino Danilak',
