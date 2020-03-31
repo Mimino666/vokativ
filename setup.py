@@ -6,7 +6,6 @@ except ImportError:
     from distutils.core import setup
 
 import io
-import vokativ
 
 with io.open('README.md', encoding='utf-8') as f:
     readme = f.read()
@@ -16,7 +15,7 @@ with io.open('LICENSE', encoding='utf-8') as f:
 
 setup(
     name='vokativ',
-    version=vokativ.__version__,
+    version='1.2.0',
     description='Declension of Czech names into vocative case.',
     long_description=readme,
     author='Michal Mimino Danilak',
@@ -32,11 +31,16 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: Czech',
         'Operating System :: OS Independent',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Utilities',
     ]
 )
