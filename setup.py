@@ -12,7 +12,7 @@ with io.open('README.md', encoding='utf-8') as f:
 
 setup(
     name='vokativ',
-    version='1.2.0',
+    version='1.2.1',
     description='Declension of Czech names into vocative case.',
     long_description=readme,
     long_description_content_type='text/markdown',
