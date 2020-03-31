@@ -5,11 +5,12 @@ try:
 except ImportError:
     from distutils.core import setup
 
+import io
 import vokativ
 
-with open('README.md', encoding="utf8") as f:
+with io.open('README.md', encoding='utf-8') as f:
     readme = f.read()
-with open('LICENSE', encoding="utf8") as f:
+with io.open('LICENSE', encoding='utf-8') as f:
     license = f.read()
 
 
