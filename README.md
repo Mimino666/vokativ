@@ -86,3 +86,8 @@ funkce funguje správně v 99.7% případů.
 >>> sex(u'Nováková')
 'w'
 ```
+
+Ports
+=====
+
+Go - [https://github.com/t0mk/gokativ](https://github.com/t0mk/gokativ)
